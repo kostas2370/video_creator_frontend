@@ -8,7 +8,8 @@ import { useAxiosPrivate } from '../hooks/useAxiosPrivate'
 export default function PersistLogin() {
 
     const refresh = useRefreshToken()
-    const { accessToken, setUser } = useAuth()
+    // access_token is the name AuthContext exposes; accessToken reads as undefined.
+    const { access_token, setUser } = useAuth()
     const [loading, setLoading] = useState(true)
     useAxiosPrivate()
 
@@ -26,7 +27,7 @@ export default function PersistLogin() {
             }
         }
 
-        !accessToken ? verifyUser() : setLoading(false)
+        !access_token ? verifyUser() : setLoading(false)
 
         return () => {
             isMounted = false
